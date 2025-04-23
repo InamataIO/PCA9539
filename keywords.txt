@@ -1,8 +1,14 @@
-    
-PCA9554	KEYWORD1
+#######################################
+# Syntax highlighting for PCA9539
+#######################################
+
+PCA9539	KEYWORD1
+begin	KEYWORD2
+reset	KEYWORD2
 pinMode	KEYWORD2
-portMode KEYWORD2
+digitalWrite	KEYWORD2
 digitalRead	KEYWORD2
-digitalWrite KEYWORD2
-I2CGetValue KEYWORD2
-I2CSetValue KEYWORD2
+writeGPIO	KEYWORD2
+readGPIO	KEYWORD2
+writePolarityInversion	KEYWORD2
+readPolarityInversion	KEYWORD2

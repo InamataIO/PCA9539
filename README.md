@@ -1,27 +1,15 @@
-# PCA9539
-Arduino Library to approach PCA9539 I2C expander with digitalRead, digitalWrite and pinMode functions.
+# PCA9539 Arduino Library
+This is an Arduino library for the [PCA9539](http://www.ti.com/lit/ds/symlink/pca9539.pdf), a 16-bit I/O expander chip. It provides a simple interface for controlling the chip's input and output pins over the I2C. The library allows users to configure individual pins as inputs or outputs, set and read their digital states, and control the polarity inversion of each pin. It also offers functions to read and write to all 16 pins simultaneously.
 
-**NOTE**
-Pull RESET (pin 3) HIGH for normal operation on TI variant.
+## Library Functions
 
-Device addressing varies between vendors, if you cannot find the address on the I2C bus use
-the I2C Scanner sketch by Nick Gammon to determine correct address.
-http://www.gammon.com.au/i2c
-
-##Installation:
-* a) Just download the zip file
-* b) move PCA9539_LIB to the Users Arduino library (usually My documents\Arduino\Libraries)
-* c) Create a new sketch and copy the example file into your sketch 
-* d) Compile, download and done.
-
-## Support functions:
-
-* pinMode() same as standard Arduino
-* digitalRead() same as Arduino
-* digitalWrite() same as Arduino
- 
-## Additional
-The code supports either pinnumbers 0 - 15 (port 0 = 0-7, port 1 = 8-15) or A0 - A7 and B0 - B7. This to stay more or less in sync with Arduino.
-
-## Data Sheet
-the data sheet for the PCA9539a is available here: <a>http://www.ti.com/lit/ds/symlink/pca9539.pdf</a>
+- `PCA9539(uint8_t address)`: Constructor that initializes the library with the I2C address of the PCA9539 chip.
+- `begin()`: Initializes the I2C communication using `Wire.begin()`.
+- `reset()`: Resets the PCA9539 to a default state: all pins are set as inputs, output registers are low, and polarity inversion is disabled.
+- `pinMode(uint8_t pin, uint8_t mode)`: Configures the specified pin as either `INPUT` or `OUTPUT`.
+- `digitalWrite(uint8_t pin, uint8_t value)`: Sets the output value of the specified pin to `HIGH` or `LOW`.
+- `digitalRead(uint8_t pin)`: Reads the digital value of the specified pin, returning `HIGH` or `LOW`.
+- `writeGPIO(uint16_t value)`: Writes a 16-bit value to all output pins simultaneously.
+- `readGPIO()`: Reads the current state of all input pins and returns a 16-bit value.
+- `writePolarityInversion(uint16_t value)`: Sets the polarity inversion for all pins using a 16-bit value.
+- `readPolarityInversion()`: Reads the current polarity inversion settings and returns a 16-bit value.
