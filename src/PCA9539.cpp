@@ -7,11 +7,12 @@
 
 #include "PCA9539.h"
 
-PCA9539::PCA9539(uint8_t address) : _address(address) {}
+PCA9539::PCA9539(uint8_t address, TwoWire *wire)
+    : _address(address), _wire(wire ? wire : &Wire) {}
 
 void PCA9539::begin()
 {
-    Wire.begin();
+    _wire->begin();
 }
 
 void PCA9539::reset()
@@ -95,18 +96,18 @@ uint16_t PCA9539::readPolarityInversion()
 
 uint8_t PCA9539::readRegister(uint8_t reg)
 {
-    Wire.beginTransmission(_address);
-    Wire.write(reg);
-    Wire.endTransmission();
+    _wire->beginTransmission(_address);
+    _wire->write(reg);
+    _wire->endTransmission();
 
-    Wire.requestFrom(_address, (uint8_t)1);
-    return Wire.read();
+    _wire->requestFrom(_address, (uint8_t)1);
+    return _wire->read();
 }
 
 void PCA9539::writeRegister(uint8_t reg, uint8_t value)
 {
-    Wire.beginTransmission(_address);
-    Wire.write(reg);
-    Wire.write(value);
-    Wire.endTransmission();
+    _wire->beginTransmission(_address);
+    _wire->write(reg);
+    _wire->write(value);
+    _wire->endTransmission();
 }

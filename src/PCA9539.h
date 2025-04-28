@@ -30,9 +30,11 @@ public:
     /**
      * @brief Constructor for PCA9539.
      * 
+     * ESP32 devices have mulitple I2C interfaces and this allows using them.
+     * 
      * @param address I2C address of the PCA9539 device.
      */
-    explicit PCA9539(uint8_t address);
+    explicit PCA9539(uint8_t address, TwoWire *wire = nullptr);
 
     /**
      * @brief Initializes the Wire library.
@@ -99,6 +101,7 @@ public:
 
 private:
     uint8_t _address;
+    TwoWire* _wire;
 
     enum Register {
         INPUT_PORT_0           = 0x00,
